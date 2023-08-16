@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+.row {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  flex: 1;
+}
+
+.main-content {
+  flex: 4;
+}
+
+.main-content.expanded {
+  flex: 5; /* Adjust this value based on your layout */
+}
+
+.main-content.centered {
+  flex: 5; /* Adjust this value based on your layout */
+  display: flex;
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+}
