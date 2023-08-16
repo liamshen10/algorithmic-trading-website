@@ -45,11 +45,11 @@ function LoginScreen() {
             <div className="text-center mt-3">
               <a href="/forgot-password" className="text-secondary">Forgot Password?</a>
             </div>
-            <div className="text-center mt-3">
-              <a href="/" className="text-secondary">Go to Home</a>
-            </div>
             <div className="text-center mt-1">
               <a href="/register" className="text-secondary">Not a member? Register</a>
+            </div>
+            <div className="text-center mt-3">
+              <a href="/home" className="text-secondary">Go to Home</a>
             </div>
           </div>
         </div>
