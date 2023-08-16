@@ -78,9 +78,6 @@ function RegisterScreen() {
             <div className="text-center mt-3">
               <a href="/" className="text-secondary">Go to Home</a>
             </div>
-            <div className="text-center mt-1">
-              <a href="/profile" className="text-secondary">Go to Profile</a>
-            </div>
           </div>
         </div>
       </div>
