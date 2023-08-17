@@ -5,7 +5,8 @@ import { fetchProfile, updateProfile } from '../services/profile-thunks';
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
-  const profile = useSelector(state => state.profile.data);
+  const profile = useSelector(state => state.profile.profile);
+  const user = useSelector(state => state.user.currentUser);
   const [editableProfile, setEditableProfile] = useState({});
   const { profileId } = useParams();
 
@@ -39,6 +40,7 @@ const ProfileScreen = () => {
       <h1>Profile Screen</h1>
       {profile ? (
         <div>
+          <h2>Welcome, {user.username}</h2>
           <form onSubmit={handleSubmit}>
             <div>
               <label>Email:</label>
@@ -60,16 +62,6 @@ const ProfileScreen = () => {
             </div>
             <button type="submit">Save Changes</button>
           </form>
-          <h2>Following</h2>
-          {/* Render following list */}
-          <h2>Followers</h2>
-          {/* Render followers list */}
-          <h2>Favorites</h2>
-          {/* Render favorites list */}
-          <h2>Reviews</h2>
-          {/* Render reviews list */}
-          <h2>Bookmarks</h2>
-          {/* Render bookmarks list */}
         </div>
       ) : (
         <p>Loading...</p>
