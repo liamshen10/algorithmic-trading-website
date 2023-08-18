@@ -1,0 +1,60 @@
+.list-group {
+    width: 0;
+    overflow: hidden;
+    transition: all 0.5s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1; /* This will ensure the sidebar appears above the main content */
+  }
+  
+  .list-group.open {
+    width: 250px;
+  }
+  
+  .list-group::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 250px; /* Start the overlay where the sidebar ends */
+    width: calc(100% - 250px); /* Subtract the width of the sidebar */
+    height: 100%;
+    backdrop-filter: blur(5px);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 1; /* This will ensure the overlay appears above the main content */
+  }
+  
+  .list-group.open::before {
+    opacity: 1;
+  }
+  
+  .list-group-item {
+    padding: 15px;
+  }
+  
+  .toggle-sidebar {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 3; /* This will ensure the toggle button appears above the sidebar */
+    transition: left 0.5s;
+  }
+  
+  .toggle-sidebar:focus {
+    outline: none;
+  }
+  
+  .sidebar-container {
+    position: relative;
+  }
+  
