@@ -12,6 +12,7 @@ import './App.css'; // import your newly created CSS file
 import NavigationSidebar from "./navigation/navigation";
 import LoginScreen from "./login-page/login-screen";
 import ProfileScreen from "./profile-page/profile-screen";
+import SearchScreen from "./search-page/search-screen";
 
 const store = configureStore({ reducer: { user: authReducer, profile: profileReducer } });
 
@@ -31,6 +32,8 @@ function App() {
               <Route path="/register" element={<RegisterScreen />} />
               <Route path="/profile" element={<ProfileScreen />} />
               <Route path="/profile/:profileId" element={<ProfileScreen />} />
+              <Route path="/search" element={<SearchScreen />} />
+              <Route path="/search/:criteria" element={<SearchScreen />} />
             </Routes>
           </div>
         </div>

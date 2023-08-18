@@ -12,7 +12,7 @@ const NavigationSidebar = ({ onClose }) => {
     const [isOpen, setIsOpen] = useState(false);
     const links = [
     { name: "home", icon: <FiHome /> },
-    { name: "explore", icon: <FiSearch /> },
+    { name: "search", icon: <FiSearch /> },
     { name: "notifications", icon: <FiBell /> },
     { name: "messages", icon: <FiMail /> },
     { name: "bookmarks", icon: <FiBookmark /> },
