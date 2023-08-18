@@ -13,8 +13,10 @@ import NavigationSidebar from "./navigation/navigation";
 import LoginScreen from "./login-page/login-screen";
 import ProfileScreen from "./profile-page/profile-screen";
 import SearchScreen from "./search-page/search-screen";
+import DetailsScreen from "./details-page/details-screen";
+import detailsReducer from "./reducers/details-reducer";
 
-const store = configureStore({ reducer: { user: authReducer, profile: profileReducer } });
+const store = configureStore({ reducer: { details: detailsReducer, user: authReducer, profile: profileReducer } });
 
 function App() {
   const [isSidebarOpen, setSidebarOpen] = useState(false); // Initialize as closed
@@ -34,6 +36,8 @@ function App() {
               <Route path="/profile/:profileId" element={<ProfileScreen />} />
               <Route path="/search" element={<SearchScreen />} />
               <Route path="/search/:criteria" element={<SearchScreen />} />
+              <Route path="/details/:uniqueIdentifier" element={<DetailsScreen />} />
+
             </Routes>
           </div>
         </div>
