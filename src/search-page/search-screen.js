@@ -8,6 +8,7 @@ import mapboxgl from 'mapbox-gl';
 const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
+  const [showResults, setShowResults] = useState(true);
   const { criteria } = useParams();
   const navigate = useNavigate();
 
@@ -15,7 +16,7 @@ const SearchPage = () => {
   const popupRef = useRef();
 
   const fetchResults = useCallback(async (searchTerm) => {
-    if (!searchTerm) return;
+    if (!searchTerm || !showResults) return;
     try {
       const bbox = '-71.1912,42.2279,-70.7488,42.3981';
       const response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${searchTerm}.json?access_token=${process.env.REACT_APP_MAPBOX_API_KEY}&proximity=-71.057083,42.361145&bbox=${bbox}`);
@@ -23,7 +24,7 @@ const SearchPage = () => {
     } catch (error) {
       console.error('Error fetching results:', error);
     }
-  }, []);
+  }, [showResults]);
 
   useEffect(() => {
     if (criteria) {
@@ -35,17 +36,6 @@ const SearchPage = () => {
   useEffect(() => {
     fetchResults(searchTerm);
   }, [searchTerm, fetchResults]);
-
-  const handleFocus = () => {
-    document.getElementById('map').style.filter = 'blur(4px)';
-  };
-
-  const handleBlur = () => {
-    setTimeout(() => {
-      document.getElementById('map').style.filter = 'none';
-      setResults([]);
-    }, 100);
-  };
 
   const handleSearch = () => {
     navigate(`/search/${searchTerm}`);
@@ -64,10 +54,14 @@ const SearchPage = () => {
       ]
     });
 
-    map.on('click', async (e) => {
+    map.on('dblclick', async (e) => {
+      setShowResults(false);
       const response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${e.lngLat.lng},${e.lngLat.lat}.json?access_token=${process.env.REACT_APP_MAPBOX_API_KEY}`);
       const placeName = response.data.features[0]?.place_name;
       showPopup(e.lngLat, placeName);
+      navigate(`/search/${placeName}`);
+      // Reset the results to prevent list items from showing
+      setResults([]);
     });
 
     mapRef.current = map;
@@ -77,21 +71,39 @@ const SearchPage = () => {
     if (popupRef.current) {
       popupRef.current.remove();
     }
-  
+
     const imageURL = `https://maps.googleapis.com/maps/api/streetview?size=200x200&location=${encodeURIComponent(placeName)}&fov=80&heading=70&pitch=0&key=${process.env.REACT_APP_GOOGLE_API_KEY}`;
-  
+
     popupRef.current = new mapboxgl.Popup({ closeOnClick: true })
       .setLngLat(coords)
       .setHTML(`<div style="text-align:center;"><img src="${imageURL}" alt="Street View" style="width:100px;height:100px;"/><p>${placeName}</p></div><a href="/details/${encodeURIComponent(placeName)}">Details</a>`)
       .addTo(mapRef.current);
   };
-  
 
   const handleResultClick = (result) => {
+    setShowResults(true);
     if (!mapRef.current) return;
-  
+
+    const placeName = result.place_name;
+    setSearchTerm(placeName);
     mapRef.current.flyTo({ center: result.geometry.coordinates, zoom: 15 });
-    showPopup(result.geometry.coordinates, result.place_name);
+    setResults([]); // Clear the results to hide the list
+    showPopup(result.geometry.coordinates, placeName); // Show the popup
+    navigate(`/search/${placeName}`);
+  };
+
+  const handleFocus = () => {
+    setShowResults(true);
+    document.getElementById('map').style.filter = 'blur(4px)';
+  };
+  
+  const handleBlur = (e) => {
+    if (e.relatedTarget && e.relatedTarget.tagName === 'LI') return;
+  
+    setTimeout(() => {
+      document.getElementById('map').style.filter = 'none';
+      setResults([]); // Hide the list items
+    }, 100);
   };
 
   return (
@@ -100,19 +112,31 @@ const SearchPage = () => {
         <input
           type="text"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            if (e.target.value && showResults) {
+              fetchResults(e.target.value);
+            }
+          }}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSearch();
+            }
+          }}
         />
         <button onClick={handleSearch}>Search</button>
       </div>
-      <ul>
-        {results.map((result) => (
-          <li key={result.id} onClick={() => handleResultClick(result)}>
-            {result.place_name}
-          </li>
-        ))}
-      </ul>
+      {results.length > 0 && (
+        <ul>
+          {results.map((result) => (
+            <li key={result.id} onClick={() => handleResultClick(result)}>
+              {result.place_name}
+            </li>
+          ))}
+        </ul>
+      )}
       <div id="map"></div>
     </div>
   );
