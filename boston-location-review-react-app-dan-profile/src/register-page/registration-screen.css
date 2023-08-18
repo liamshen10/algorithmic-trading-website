@@ -1,0 +1,15 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+  }
+  
+  .card {
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+  }
+  
+  a.text-secondary:hover {
+    text-decoration: underline;
+  }
+  
