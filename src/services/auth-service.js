@@ -7,6 +7,11 @@ export const register = async ({ username, password, role }) => {
   return response.data;
 };
 
+export const logout = async () => {
+  const response = await api.post(`${apiBaseURL}/logout`);
+  return response.data;
+ };
+
 
 export const login = async ({ username, password }) => {
   const response = await api.post(`${apiBaseURL}/login`, { username, password });

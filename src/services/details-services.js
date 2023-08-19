@@ -19,3 +19,9 @@ export const addReviewApi = async (review) => {
     const response = await api.post("/reviews", review);
     return response.data;
 };
+
+
+export const getReviewByIdApi = async (reviewId) => {
+    const response = await api.get(`/reviews/${reviewId}`);
+    return response.data;
+  };

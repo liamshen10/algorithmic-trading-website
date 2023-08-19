@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { register, login, fetchProfile, updateProfile } from "../services/auth-thunks";
+import { logout, register, login, fetchProfile, updateProfile } from "../services/auth-thunks";
 
 const loadCurrentUser = () => {
   const savedState = localStorage.getItem("currentUser");
@@ -15,6 +15,10 @@ const authSlice = createSlice({
       console.log("Register Paylod: ", payload);
       state.currentUser = payload;
       localStorage.setItem("currentUser", JSON.stringify(payload));
+    },
+    [logout.fulfilled]: (state) => {
+      console.log(state.currentUser);
+      state.currentUser = null;
     },
     [login.fulfilled]: (state, { payload }) => {
       console.log("Login Paylod: ", payload);
