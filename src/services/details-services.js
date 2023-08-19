@@ -22,6 +22,7 @@ export const addReviewApi = async (review) => {
 
 
 export const getReviewByIdApi = async (reviewId) => {
-    const response = await api.get(`/reviews/${reviewId}`);
+    const response = await api.get(`/review/${reviewId}`);
+    console.log("API response data:", response.data);
     return response.data;
   };

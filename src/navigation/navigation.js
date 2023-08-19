@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { FiUserPlus, FiLogIn, FiHome, FiSearch, FiBell, FiMail, FiBookmark, FiList, FiUser, FiMoreHorizontal } from "react-icons/fi";
+import { FiUserPlus, FiLogIn, FiHome, FiSearch, FiUser } from "react-icons/fi";
 import "./navigation-sidebar.css";
 
 const NavigationSidebar = ({ onClose }) => {
@@ -13,11 +13,6 @@ const NavigationSidebar = ({ onClose }) => {
     const links = [
     { name: "home", icon: <FiHome /> },
     { name: "search", icon: <FiSearch /> },
-    { name: "notifications", icon: <FiBell /> },
-    { name: "messages", icon: <FiMail /> },
-    { name: "bookmarks", icon: <FiBookmark /> },
-    { name: "lists", icon: <FiList /> },
-    { name: "more", icon: <FiMoreHorizontal /> }
   ];
 
   const handleLinkClick = (path) => {

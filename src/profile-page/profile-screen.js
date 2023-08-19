@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import { fetchProfile, updateProfile } from '../services/auth-thunks';
 import { getReviewById } from '../services/details-thunks';
 import { useNavigate } from "react-router";
@@ -45,10 +45,13 @@ const ProfileScreen = () => {
     const fetchReviews = async () => {
       const fetchedReviews = [];
       for (let i = 0; i < user.reviews.length && i < 5; i++) {
+        console.log("User Reviews", user.reviews[i]);
         const result = await dispatch(getReviewById(user.reviews[i]));
+        console.log("Result: ", result);
         if (result.payload) {
-          console.log("paylod: ", result.payload);
+          console.log("Review: ", result.payload);
           fetchedReviews.push(result.payload);
+          console.log("Fetched Reviews:", fetchedReviews);
         }
       }
       setReviews(fetchedReviews);
@@ -68,14 +71,23 @@ const ProfileScreen = () => {
               <p>Phone: {user.phone}</p>
           <h3>Recent Reviews:</h3>
           <ul>
-            {reviews.map((review, index) => (
-              <li key={index}>
-                <p>{review.content}</p>
-                <p>Stars: {review.stars}</p>
-                <p>Date: {new Date(review.timestamp).toLocaleDateString()}</p>
-              </li>
-            ))}
-          </ul>
+  {reviews.map((review, index) => (
+    <li key={index}>
+      <p>{review.content}</p>
+      <p>Stars: {'⭐'.repeat(review.stars)}</p>
+      <p>Date: {new Date(review.timestamp).toLocaleDateString()}</p>
+      {review.location_id && (
+        <p>
+          Location: 
+          <a href={`/details/${review.location_id}`}>
+            {review.location_id}
+          </a>
+        </p>
+      )}
+    </li>
+  ))}
+</ul>
+
           <form onSubmit={handleSubmit}>
             <div>
               <label>Email:</label>

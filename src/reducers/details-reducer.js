@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchDetails, fetchReviews, addReview } from "../services/details-thunks";
+import { fetchDetails, fetchReviews, addReview, getReviewById } from "../services/details-thunks";
+
+
 
 const detailsSlice = createSlice({
     name: "details",
@@ -19,7 +21,10 @@ const detailsSlice = createSlice({
         },
         [addReview.fulfilled]: (state, { payload }) => {
             state.reviews.push(payload);
-        }
+        },
+        [getReviewById.fulfilled]: (state, { payload }) => {
+            console.log("getReviewById Payload:", payload);
+            state.reviews.push(payload)},
     }
 });
 
