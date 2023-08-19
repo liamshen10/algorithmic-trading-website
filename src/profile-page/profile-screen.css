@@ -1,0 +1,126 @@
+.profile-container {
+  width: 100%;
+  max-width: 80%;
+  margin: 0 auto; /* Center the container */
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 20px;
+  border: 1px solid #e0e0e0; /* Faint border around the large container */
+}
+
+.welcome-message {
+  text-align: center;
+  color: #333;
+  padding: 20px;
+  font-size: 40px;
+  border-bottom: 1px solid #e0e0e0; /* Faint line separating the header */
+}
+
+.profile-content {
+  display: flex;
+  justify-content: space-between;
+  min-height: 80vh;
+}
+
+.user-details {
+  flex: 1;
+  padding: 40px;
+  background-color: #f2f2f2;
+  border-right: 1px solid #e0e0e0; /* Faint line separating the user section */
+}
+
+.reviews-section {
+  flex: 3;
+  padding: 40px;
+}
+
+.reviews-header {
+  text-align: center;
+  color: #333;
+  font-size: 30px;
+}
+
+.user-details p {
+  margin-bottom: 20px;
+  color: #555;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.user-details p:before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background-color: #007bff;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.reviews-list {
+  list-style: none;
+  padding: 0;
+}
+
+.review-item {
+  margin-bottom: 30px;
+  color: #555;
+  font-size: 16px;
+}
+
+.profile-form .form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.profile-form label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.input-field {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus {
+  border-color: #007bff;
+}
+
+.button-logout, .button-save {
+  padding: 15px 30px;
+  margin: 10px auto;
+  display: block;
+  width: 200px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+.button-logout:hover, .button-save:hover {
+  background-color: #0056b3; /* Hover effect for both buttons */
+}
+
+.button-logout {
+  background-color: #f44336;
+}
+
+.button-logout:hover {
+  background-color: #d32f2f;
+}
