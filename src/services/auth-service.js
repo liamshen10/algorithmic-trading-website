@@ -12,3 +12,14 @@ export const login = async ({ username, password }) => {
   const response = await api.post(`${apiBaseURL}/login`, { username, password });
   return response.data;
  };
+
+ export const getProfile = async (profileId) => {
+  const response = await api.get(`${apiBaseURL}/profile/${profileId}`);
+  return response.data;
+};
+
+export const updateProfile = async (id, profileUpdate) => {
+  const response = await api.put(`${apiBaseURL}/profile/${id}`, profileUpdate);
+  console.log(response.data);
+  return response.data;
+};

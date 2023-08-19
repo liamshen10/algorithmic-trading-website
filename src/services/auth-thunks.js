@@ -15,3 +15,17 @@ export const login= createAsyncThunk(
   }
  );
 
+
+ export const fetchProfile = createAsyncThunk(
+  "profile/fetchProfile", async (profileId) => {
+    const profile = await authService.getProfile(profileId);
+    return profile;
+  }
+);
+
+export const updateProfile = createAsyncThunk(
+  "profile/updateProfile", async ({id, profileUpdate}) => {
+    const updatedProfile = await authService.updateProfile(id, profileUpdate);
+    return updatedProfile;
+  }
+);

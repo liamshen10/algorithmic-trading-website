@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { register, login } from "../services/auth-thunks";
+import { register, login, fetchProfile, updateProfile } from "../services/auth-thunks";
 
 const authSlice = createSlice({
     name: "auth",
@@ -12,6 +12,14 @@ const authSlice = createSlice({
         },
     [login.fulfilled]: (state, { payload }) => {
         console.log("Login Paylod: ", payload);
+            state.currentUser = payload;
+          },
+    [fetchProfile.fulfilled]: (state, { payload }) => {
+            console.log("Get Profile payload: ", payload);
+            state.currentUser = payload;
+          },
+    [updateProfile.fulfilled]: (state, { payload }) => {
+            console.log("Update Profile payload: ", payload);
             state.currentUser = payload;
           },
     },

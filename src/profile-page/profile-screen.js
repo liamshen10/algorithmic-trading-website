@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchProfile, updateProfile } from '../services/profile-thunks';
+import { fetchProfile, updateProfile } from '../services/auth-thunks';
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
-  const profile = useSelector(state => state.profile.profile);
   const user = useSelector(state => state.user.currentUser);
-  console.log(user);
   const [editableProfile, setEditableProfile] = useState({});
   const { profileId } = useParams();
   const id  = user._id;
-  console.log("ProfileID:", id);
 
   useEffect(() => {
     if (profileId) {
-      dispatch(fetchProfile(profileId));
+      dispatch(fetchProfile( profileId));
     } else {
       // Handle the case where the profile ID is not specified  
     }
   }, [profileId, dispatch]);
 
   useEffect(() => {
-    setEditableProfile(profile);
-  }, [profile]);
+    setEditableProfile(user);
+  }, [user]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -42,9 +39,11 @@ const ProfileScreen = () => {
   return (
     <div>
       <h1>Profile Screen</h1>
-      {profile ? (
+      {user ? (
         <div>
           <h2>Welcome, {user.username}</h2>
+              <p>Email: {user.email}</p>
+              <p>Phone: {user.phone}</p>
           <form onSubmit={handleSubmit}>
             <div>
               <label>Email:</label>

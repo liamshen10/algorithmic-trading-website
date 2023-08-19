@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Routes, Route } from "react-router";
 import RegisterScreen from "./register-page/registration-screen";
 import authReducer from "./reducers/auth-reducer";
-import profileReducer from "./reducers/profile-reducer";
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,7 +15,7 @@ import SearchScreen from "./search-page/search-screen";
 import DetailsScreen from "./details-page/details-screen";
 import detailsReducer from "./reducers/details-reducer";
 
-const store = configureStore({ reducer: { details: detailsReducer, user: authReducer, profile: profileReducer } });
+const store = configureStore({ reducer: { details: detailsReducer, user: authReducer} });
 
 function App() {
   const [isSidebarOpen, setSidebarOpen] = useState(false); // Initialize as closed
