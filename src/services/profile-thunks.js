@@ -9,8 +9,8 @@ export const fetchProfile = createAsyncThunk(
 );
 
 export const updateProfile = createAsyncThunk(
-  "profile/updateProfile", async (profileUpdate) => {
-    const updatedProfile = await profileService.updateProfile(profileUpdate);
+  "profile/updateProfile", async (id, profileUpdate) => {
+    const updatedProfile = await profileService.updateProfile(id, profileUpdate);
     return updatedProfile;
   }
 );

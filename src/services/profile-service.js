@@ -7,7 +7,8 @@ export const getProfile = async (profileId) => {
   return response.data;
 };
 
-export const updateProfile = async (profileUpdate) => {
-  const response = await api.put(`${apiBaseURL}/profile`, profileUpdate);
+export const updateProfile = async (id, profileUpdate) => {
+  const response = await api.put(`${apiBaseURL}/profile/${id}`, profileUpdate);
+  console.log(response.data);
   return response.data;
 };

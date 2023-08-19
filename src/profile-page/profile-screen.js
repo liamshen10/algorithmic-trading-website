@@ -7,14 +7,17 @@ const ProfileScreen = () => {
   const dispatch = useDispatch();
   const profile = useSelector(state => state.profile.profile);
   const user = useSelector(state => state.user.currentUser);
+  console.log(user);
   const [editableProfile, setEditableProfile] = useState({});
   const { profileId } = useParams();
+  const id  = user._id;
+  console.log("ProfileID:", id);
 
   useEffect(() => {
     if (profileId) {
       dispatch(fetchProfile(profileId));
     } else {
-      // Handle the case where the profile ID is not specified
+      // Handle the case where the profile ID is not specified  
     }
   }, [profileId, dispatch]);
 
@@ -32,7 +35,8 @@ const ProfileScreen = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateProfile(editableProfile));
+    console.log('Editable Profile: ', editableProfile);
+    dispatch(updateProfile(id, editableProfile));
   };
 
   return (
