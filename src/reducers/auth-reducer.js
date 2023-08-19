@@ -7,9 +7,11 @@ const authSlice = createSlice({
     reducers: {},
     extraReducers: {
     [register.fulfilled]: (state, { payload }) => {
+        console.log("Register Paylod: ", payload);
         state.currentUser = payload;
         },
     [login.fulfilled]: (state, { payload }) => {
+        console.log("Login Paylod: ", payload);
             state.currentUser = payload;
           },
     },

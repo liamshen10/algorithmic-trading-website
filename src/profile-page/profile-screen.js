@@ -36,7 +36,7 @@ const ProfileScreen = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Editable Profile: ', editableProfile);
-    dispatch(updateProfile(id, editableProfile));
+    dispatch(updateProfile({id, profileUpdate: editableProfile}));
   };
 
   return (
