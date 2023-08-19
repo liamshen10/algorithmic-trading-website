@@ -43,17 +43,17 @@ const DetailsScreen = () => {
   if (!details) return <p>Loading...</p>;
 
   return (
-    <div className="details-container">
-      <div className="header">
+    <div className="details-details-container">
+      <div className="details-header">
         <h2>{details.place_name}</h2>
-        <Link to="/search" className="back-button">Back to Search</Link>
+        <Link to="/search" className="details-back-button">Back to Search</Link>
       </div>
-      <img src={streetViewImageURL} alt="Street View of the Address" />
-      <div className="reviews-section">
+      <img src={streetViewImageURL} alt="Street View of the Address" className="details-img" />
+      <div className="details-reviews-section">
         <h3>Reviews</h3>
         {reviews.length > 0 ? (
           reviews.map((review, index) => (
-            <div key={index} className="review">
+            <div key={index} className="details-review">
               <p>{'⭐'.repeat(review.stars)}</p>
               <Link to={`/user/${review.userId}`}>View User Profile</Link>
               <p>{review.content}</p>
@@ -63,33 +63,34 @@ const DetailsScreen = () => {
           <p>No reviews yet.</p>
         )}
       </div>
-      <div className="add-review">
-  <h3>Add a review</h3>
-  <div className="star-rating">
-  {Array.from({ length: 5 }, (_, index) => (
-    <label key={index}>
-      <input
-        type="radio"
-        name="rating"
-        value={index + 1}
-        checked={newRating === index + 1}
-        onChange={(e) => setNewRating(Number(e.target.value))}
-      />
-      <span className="star">&#9733;</span>
-    </label>
-  ))}
-</div>
-  <textarea
-    value={newReview}
-    onChange={(e) => setNewReview(e.target.value)}
-    placeholder="Write your review here"
-  />
-  <button onClick={handleAddReview}>Add Review</button>
-</div>
-
-
+      <div className="details-add-review">
+        <h3>Add a review</h3>
+        <div className="details-star-rating">
+          {Array.from({ length: 5 }, (_, index) => (
+            <label key={index}>
+              <input
+                type="radio"
+                name="rating"
+                value={index + 1}
+                checked={newRating === index + 1}
+                onChange={(e) => setNewRating(Number(e.target.value))}
+                className="details-input"
+              />
+              <span className="details-star">&#9733;</span>
+            </label>
+          ))}
+        </div>
+        <textarea
+          value={newReview}
+          onChange={(e) => setNewReview(e.target.value)}
+          placeholder="Write your review here"
+          className="details-textarea"
+        />
+        <button onClick={handleAddReview} className="details-button">Add Review</button>
+      </div>
     </div>
   );
+  
 };
 
 export default DetailsScreen;
