@@ -1,20 +1,20 @@
-.details-container {
+.details-details-container {
     font-family: Arial, sans-serif;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .header {
+}
+
+.details-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-  }
-  
-  .back-button {
+}
+
+.details-back-button {
     background-color: #f39c12;
     color: #ffffff;
     padding: 10px 15px;
@@ -24,93 +24,93 @@
     text-align: center;
     cursor: pointer;
     transition: background-color 0.2s;
-  }
-  
-  .back-button:hover {
+}
+
+.details-back-button:hover {
     background-color: #e67e22;
-  }
-  
-  img {
+}
+
+.details-img {
     width: 100%;
     height: auto;
     border-radius: 8px;
     margin-bottom: 20px;
-  }
-  
-  .reviews-section, .add-review {
+}
+
+.details-reviews-section, .details-add-review {
     margin-bottom: 20px;
-  }
-  
-  .review {
+}
+
+.details-review {
     padding: 10px;
-    border-bottom: 1px solid #e0e0e0;
-  }
-  
-  .review:last-child {
+    border-bottom: 1px solid #e0e0e0;   
+}
+
+.details-review:last-child {
     border-bottom: none;
-  }
-  
-  .star-rating {
+}
+
+.details-star-rating {
     display: flex;
     justify-content: flex-start;
     margin-bottom: 10px;
-  }
-  
-  input[type="radio"] {
+}
+
+.details-input[type="radio"] {
     display: none;
-  }
-  
-  .star {
+}
+
+.details-star {
     color: #ccc;
     cursor: pointer;
     font-size: 24px;
     margin-right: 8px;
-  }
-  
-  input:checked ~ .star,
-  input:checked ~ label .star {
+}
+
+.details-input:checked ~ .details-star,
+.details-input:checked ~ label .details-star {
     color: #f39c12;
-  }
-  
-  input:checked ~ label .star {
+}
+
+.details-input:checked ~ label .details-star {
     color: #f39c12;
-  }
-  
-  input:checked ~ .star {
+}
+
+.details-input:checked ~ .details-star {
     color: #f39c12;
-  }
-  
-  input:checked ~ label ~ .star {
+}
+
+.details-input:checked ~ label ~ .details-star {
     color: #f39c12;
-  }
-  
-  input:hover ~ .star,
-  input:hover ~ label .star {
+}
+
+.details-input:hover ~ .details-star,
+.details-input:hover ~ label .details-star {
     color: #f39c12;
-  }
-  
-  input:checked + .star {
+}
+
+.details-input:checked + .details-star {
     color: #f39c12;
-  }
-  
-  label:hover .star {
+}
+
+.details-label:hover .details-star {
     color: #f39c12;
-  }
-  
-  label:hover ~ label .star {
+}
+
+.details-label:hover ~ label .details-star {
     color: #ccc;
-  }
-  
-  textarea {
+}
+
+.details-textarea {
     width: 100%;
     height: 100px;
     padding: 10px;
     font-size: 14px;
     border: 1px solid #e0e0e0;
     border-radius: 5px;
-  }
-  
-  button {
+}
+
+.details-button {
     padding: 10px 20px;
     background-color: #f39c12;
     color: #ffffff;
@@ -118,9 +118,8 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.2s;
-  }
-  
-  button:hover {
+}
+
+.details-button:hover {
     background-color: #e67e22;
-  }
-  
+}

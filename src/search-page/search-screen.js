@@ -126,11 +126,12 @@
     };
     
     return (
-      <div className="container">
-        <div className="search-bar">
+      <div className="search-container">
+        <div className="search-search-bar">
           <input
             type="text"
             value={searchTerm}
+            className="search-input"
             onChange={(e) => {
               setSearchTerm(e.target.value);
               if (e.target.value && showResults) {
@@ -145,18 +146,18 @@
               }
             }}
           />
-          <button onClick={handleSearch}>Search</button>
+          <button className="search-button" onClick={handleSearch}>Search</button>
         </div>
         {results.length > 0 && (
-          <ul>
+          <ul className="search-ul">
             {results.map((result) => (
-              <li key={result.id} onClick={() => handleResultClick(result)}>
+              <li key={result.id} className="search-li" onClick={() => handleResultClick(result)}>
                 {result.place_name}
               </li>
             ))}
           </ul>
         )}
-        <div id="map"></div>
+        <div id="map" className="search-map"></div>
       </div>
     );
   };
