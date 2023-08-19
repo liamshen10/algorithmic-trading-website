@@ -1,0 +1,45 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f7f7;
+}
+
+.card.p-4 {
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  padding: 40px !important; /* Increase padding, using !important to override other styles if necessary */
+  width: 100%; /* Set the width to 100% */
+  max-width: 800px; /* Set a maximum width */
+}
+
+.form-check {
+  display: flex; /* Make sure the radio buttons and labels are aligned horizontally */
+}
+
+.form-check-input {
+  position: static; /* Override default browser styling for radio buttons */
+  opacity: 1; /* Make radio buttons visible */
+  margin-right: 10px; /* Add margin to separate the radio button and label */
+}
+
+a.text-secondary:hover {
+  text-decoration: underline;
+}
+/* Target the radio buttons specifically and set their display properties */
+.form-check-input[type="radio"] {
+  display: inline-block !important; /* Override any conflicting display properties */
+  opacity: 1 !important; /* Ensure the radio buttons are fully visible */
+  margin-right: 10px !important; /* Add margin to separate the radio button and label */
+}
+
+/* Target the labels for the radio buttons and set their display properties */
+.form-check-label {
+  display: inline !important; /* Override any conflicting display properties */
+  color: #000 !important; /* Set the text color to ensure visibility */
+}
+
+/* Target the container for the radio buttons and set its display properties */
+.form-check {
+  display: flex !important; /* Override any conflicting display properties */
+  align-items: center !important; /* Align the radio buttons and labels vertically */
+}

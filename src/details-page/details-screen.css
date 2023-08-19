@@ -1,0 +1,126 @@
+.details-container {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .back-button {
+    background-color: #f39c12;
+    color: #ffffff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .back-button:hover {
+    background-color: #e67e22;
+  }
+  
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .reviews-section, .add-review {
+    margin-bottom: 20px;
+  }
+  
+  .review {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .review:last-child {
+    border-bottom: none;
+  }
+  
+  .star-rating {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  input[type="radio"] {
+    display: none;
+  }
+  
+  .star {
+    color: #ccc;
+    cursor: pointer;
+    font-size: 24px;
+    margin-right: 8px;
+  }
+  
+  input:checked ~ .star,
+  input:checked ~ label .star {
+    color: #f39c12;
+  }
+  
+  input:checked ~ label .star {
+    color: #f39c12;
+  }
+  
+  input:checked ~ .star {
+    color: #f39c12;
+  }
+  
+  input:checked ~ label ~ .star {
+    color: #f39c12;
+  }
+  
+  input:hover ~ .star,
+  input:hover ~ label .star {
+    color: #f39c12;
+  }
+  
+  input:checked + .star {
+    color: #f39c12;
+  }
+  
+  label:hover .star {
+    color: #f39c12;
+  }
+  
+  label:hover ~ label .star {
+    color: #ccc;
+  }
+  
+  textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #f39c12;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  button:hover {
+    background-color: #e67e22;
+  }
+  
