@@ -11,6 +11,8 @@ const DetailsScreen = () => {
   const dispatch = useDispatch();
   const details = useSelector(state => state.details.details);
   const reviews = useSelector(state => state.details.reviews);
+  const user = useSelector(state => state.user.currentUser);
+  console.log(user);
   const [newReview, setNewReview] = useState('');
   const [newRating, setNewRating] = useState(0);
   const [streetViewImageURL, setStreetViewImageURL] = useState('');
@@ -31,6 +33,7 @@ const DetailsScreen = () => {
 
   const handleAddReview = () => {
     const review = {
+      userId: user._id,
       review_id: uuidv4(),
       location_id: uniqueIdentifier,
       content: newReview,
