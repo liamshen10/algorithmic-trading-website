@@ -28,3 +28,8 @@ export const updateProfile = async (id, profileUpdate) => {
   console.log(response.data);
   return response.data;
 };
+
+export const fetchDeletedReviews = async (searchTerm) => {
+  const response = await api.get(`${apiBaseURL}/reviews-deleted/${searchTerm}`);
+  return response.data;
+};

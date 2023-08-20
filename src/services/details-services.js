@@ -26,3 +26,15 @@ export const getReviewByIdApi = async (reviewId) => {
     console.log("API response data:", response.data);
     return response.data;
   };
+
+  export const deleteReviewApi = async (_id) => {
+    console.log("deleteReviewApi called with ID:", _id);
+    const response = await api.delete(`/reviews/${_id}`);
+    return { _id: _id };
+  };
+  
+  
+  export const fetchDeletedReviewsApi = async () => {
+    const response = await api.get("/deletedReviews");
+    return response.data;
+  };

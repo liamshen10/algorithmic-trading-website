@@ -34,3 +34,11 @@ export const updateProfile = createAsyncThunk(
     return updatedProfile;
   }
 );
+
+export const fetchDeletedReviews = createAsyncThunk(
+  "admin/fetchDeletedReviews",
+  async (searchTerm) => {
+    const deletedReviews = await authService.fetchDeletedReviews(searchTerm);
+    return deletedReviews;
+  }
+);
