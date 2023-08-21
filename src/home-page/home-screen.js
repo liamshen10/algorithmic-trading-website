@@ -45,47 +45,50 @@ const HomeScreen = () => {
 
   return (
     <div className="home-container">
-      <h1>Welcome to our website!</h1>
-      {welcomeMessage && <h2>{welcomeMessage}</h2>}
-      <div className="activity-container">
-        <div>
-          <h2>Latest Activity:</h2>
-          {/* ... code to display latest activity for all users ... */}
+      <h1 className="home-welcome-title">Welcome to our website!</h1>
+      <div className="home-content">
+      <div className="home-description">
+          <h2>Why Boston Location Review?</h2>
+          <p>Discover the heart of Boston through the eyes of locals and travelers alike. Boston Location Review is your go-to platform for exploring the city's hidden gems, iconic landmarks, and vibrant neighborhoods. Whether you're a food lover seeking the best clam chowder, a history buff exploring the Freedom Trail, or an adventurer looking for the next thrilling experience, we've got you covered!</p>
+          <p>Join our community of reviewers and share your insights, experiences, and recommendations. Together, we're creating a comprehensive guide to Boston's must-visit places, tailored to every taste and interest. Dive into the rich culture, savor the culinary delights, and make unforgettable memories with Boston Location Review. Your next adventure starts here!</p>
         </div>
-        {currentUser ? (
-          <div>
-            <h2>Your Recent Activity:</h2>
-            <ul>
-              {details.map((review, index) => (
-                <li key={index}>
-                  <p>{review.content}</p>
-                  <p>Stars: {'⭐'.repeat(review.stars)}</p>
-                  <p>Date: {new Date(review.timestamp).toLocaleDateString()}</p>
-                  {review.location_id && (
-                    <p>
-                      Location:
-                      <a href={`/details/${review.location_id}`}>
-                        {review.location_id}
-                      </a>
-                    </p>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : (
-          <div>
-            <h2>Random Reviewers:</h2>
-            <ul>
-              {users.map((user, index) => (
-                <li key={index}>
-                  <p>Username: {user.username}</p>
-                  <p>Number of Reviews: {user.reviews.length}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <div className="home-activity-container">
+          {welcomeMessage && <h2 className="home-welcome-message">{welcomeMessage}</h2>}
+          {currentUser ? (
+            <div className="home-recent-activity">
+              <h2>Recent Activity:</h2>
+              <ul className="home-recent-activity-list">
+                {details.map((review, index) => (
+                  <li key={index}>
+                    <p>{review.content}</p>
+                    <p>Stars: {'⭐'.repeat(review.stars)}</p>
+                    <p>Date: {new Date(review.timestamp).toLocaleDateString()}</p>
+                    {review.location_id && (
+                      <p>
+                        Location:
+                        <a href={`/details/${review.location_id}`}>
+                          {review.location_id}
+                        </a>
+                      </p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div className="home-random-reviewers">
+              <h2>Random Reviewers:</h2>
+              <ul className="home-random-reviewers-list">
+                {users.map((user, index) => (
+                  <li key={index}>
+                    <p>Username: {user.username}</p>
+                    <p>Number of Reviews: {user.reviews.length}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
