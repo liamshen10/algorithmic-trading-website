@@ -56,12 +56,15 @@
   list-style-type: none;
   padding: 0;
   position: absolute;
-  top: 70px;
+  top: 60px;
+  left: 49%;
+  transform: translateX(-50%);
   z-index: 1;
   background: #fff;
   padding: 10px;
   border-radius: 5px;
 }
+
 
 .search-li {
   padding: 8px;

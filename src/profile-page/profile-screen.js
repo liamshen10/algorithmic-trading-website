@@ -57,6 +57,7 @@ const ProfileScreen = () => {
   };
 
   const profile = viewOnly ? viewedProfile : user;
+  console.log("profile here", profile);
 
   const reviewList = user.role === 'administrator' ? deletedReviews : reviews; // Use deletedReviews if the user is an administrator
   const filteredReviews = reviewList.filter(review =>
@@ -70,7 +71,13 @@ const ProfileScreen = () => {
       {profile ? (
         <div>
           <h2>
-            {viewOnly ? (viewedProfile ? `${viewedProfile.username}'s Profile` : "Loading...") : (user ? `Welcome, ${user.username}` : "Loading...")}
+            {viewOnly
+              ? viewedProfile
+                ? `${viewedProfile.username}'s Profile`
+                : "Loading..."
+              : user
+              ? `Welcome, ${user.username}`
+              : "Loading..."}
           </h2>
           <div>
             <label>Search posts:</label>
@@ -99,7 +106,7 @@ const ProfileScreen = () => {
               ))}
             </ul>
           )}
-          {!viewOnly && (
+          {user && !viewOnly && (
             <form onSubmit={handleSubmit}>
               <div>
                 <label>Email:</label>
