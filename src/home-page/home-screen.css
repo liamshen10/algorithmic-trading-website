@@ -1,6 +1,146 @@
-.activity-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-  }
-  
+.home-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: 100vw;
+  height: 100vh;
+}
+
+.home-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('https://i.redd.it/uhja85r9m1331.png');
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px);
+  z-index: -1;
+}
+
+.home-welcome-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 34px; /* Adjusted font size */
+  font-weight: bold; /* Bold font */
+  color: #333; /* Darker color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for emphasis */
+}
+
+.home-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  gap: 20px;
+}
+
+.home-description {
+  flex: 1;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #555;
+}
+
+.home-activity-container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 70vh; /* Increased minimum height */
+}
+
+.home-welcome-message {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #007BFF;
+}
+
+.home-recent-activity,
+.home-random-reviewers,
+.home-admin-description { /* Added .home-admin-description to apply the same styles */
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-bottom: 20px;
+  overflow-y: auto;
+  height: 80%; /* Increased height */
+  display: flex; /* Centering the content */
+  flex-direction: column;
+  align-items: center; /* Centering the content */
+}
+
+.home-recent-activity-list,
+.home-random-reviewers-list {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+}
+
+.home-recent-activity-list li,
+.home-random-reviewers-list li {
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-recent-activity-list li:last-child,
+.home-random-reviewers-list li:last-child {
+  border-bottom: none;
+}
+
+.home-recent-activity-list a,
+.home-random-reviewers-list a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.home-recent-activity-list a:hover,
+.home-random-reviewers-list a:hover {
+  text-decoration: underline;
+}
+
+.home-stars {
+  color: #FFD700;
+}
+
+.home-date {
+  color: #999;
+  font-size: 12px;
+}
+
+
+.home-admin-signature {
+  margin-top: auto; /* Push the signature to the bottom of the card */
+  align-self: flex-end; /* Align the signature to the right */
+  font-style: italic; /* Italicize the text */
+  color: #555; /* Set the text color */
+}
+
+.home-recent-activity-list {
+  list-style-type: none;
+  padding: 0;
+  max-height: 70vh; /* Limit the height of the container */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.home-random-reviewers-list {
+  list-style-type: none;
+  padding: 0;
+  max-height: 70vh; /* Limit the height of the container */
+  overflow-y: auto; /* Enable vertical scrolling */
+}

@@ -6,7 +6,7 @@
     top: 0;
     left: 0;
     height: 100%;
-    z-index: 1; /* This will ensure the sidebar appears above the main content */
+    z-index: 2; /* This will ensure the sidebar appears above the main content */
   }
   
   .list-group.open {
@@ -17,14 +17,14 @@
     content: "";
     position: fixed;
     top: 0;
-    left: 250px; /* Start the overlay where the sidebar ends */
-    width: calc(100% - 250px); /* Subtract the width of the sidebar */
+    left: 0; /* Start the overlay from the left edge of the screen */
+    width: 100%; /* Cover the entire width of the screen */
     height: 100%;
     backdrop-filter: blur(5px);
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.5s;
-    z-index: 1; /* This will ensure the overlay appears above the main content */
+    z-index: 0; /* This will ensure the overlay appears below the sidebar */
   }
   
   .list-group.open::before {

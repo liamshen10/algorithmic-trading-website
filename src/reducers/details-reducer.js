@@ -23,7 +23,18 @@ const detailsSlice = createSlice({
         state.reviews.push(payload);
       },
       [getReviewById.fulfilled]: (state, { payload }) => {
-        state.reviews.push(payload);
+        console.log("ReviewById payload", payload);
+  
+        // Check if the payload already exists in the reviews state
+        const alreadyExists = state.reviews.some(review => {
+          // Compare the properties of the payload with the properties of the existing reviews
+          return Object.keys(payload).every(key => payload[key] === review[key]);
+        });
+  
+        // If the payload does not already exist, push it into the reviews state
+        if (!alreadyExists) {
+          state.reviews.push(payload);
+        }
       },
       [deleteReview.fulfilled]: (state, { payload }) => {
         console.log('Previous state of deletedReviews:', state.deletedReviews);
