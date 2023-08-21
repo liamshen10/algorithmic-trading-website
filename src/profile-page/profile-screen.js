@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { fetchProfile, updateProfile } from '../services/auth-thunks';
 import { useNavigate } from "react-router";
 import { logout } from "../services/auth-thunks";
+import "./profile-screen.css";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -65,84 +66,79 @@ const ProfileScreen = () => {
   );
 
   return (
-    <div>
-      <h1>Profile Screen</h1>
+    <div className="profile-container">
+      <h1 className="welcome-message">Welcome {user.username}</h1>
       {viewOnly && <button onClick={handleBackClick}>Back</button>}
       {profile ? (
-        <div>
-          <h2>
-            {viewOnly
-              ? viewedProfile
-                ? `${viewedProfile.username}'s Profile`
-                : "Loading..."
-              : user
-              ? `Welcome, ${user.username}`
-              : "Loading..."}
-          </h2>
-          <div>
-            <label>Search posts:</label>
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-          </div>
-          {searchTerm && (
-            <ul>
-              {filteredReviews.map((review, index) => (
-                <li key={index}>
-                  <p>{review.content}</p>
-                  <p>Stars: {'⭐'.repeat(review.stars)}</p>
-                  <p>Date: {new Date(review.timestamp).toLocaleDateString()}</p>
-                  {review.location_id && (
-                    <p>
-                      Location:
-                      <a href={`/details/${review.location_id}`}>
-                        {review.location_id}
-                      </a>
-                    </p>
-                  )}
-                </li>
-              ))}
-            </ul>
-          )}
-          {user && !viewOnly && (
+        <div className="profile-content">
+          <div className="user-details">
             <form onSubmit={handleSubmit}>
-              <div>
+              <div className="form-group">
                 <label>Email:</label>
                 <input
                   type="text"
                   name="email"
                   value={editableProfile.email || ''}
                   onChange={handleInputChange}
+                  className="input-field"
                 />
               </div>
-              <div>
+              <div className="form-group">
                 <label>Phone:</label>
                 <input
                   type="text"
                   name="phone"
                   value={editableProfile.phone || ''}
                   onChange={handleInputChange}
+                  className="input-field"
                 />
               </div>
+              <button type="submit" className="button-save">Save Changes</button>
               <button
                 onClick={() => {
                   dispatch(logout());
                   navigate("/login");
                 }}
-              >
-                Logout
-              </button>
-              <button type="submit">Save Changes</button>
+                className="button-logout">Logout</button>
             </form>
-          )}
+          </div>
+          <div className="reviews-section">
+            <div>
+              <label>Search posts:</label>
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                className="input-field"
+              />
+            </div>
+            {searchTerm && (
+              <ul className="reviews-list">
+                {filteredReviews.map((review, index) => (
+                  <li key={index} className="review-item">
+                    <p>{review.content}</p>
+                    <p>Stars: {'⭐'.repeat(review.stars)}</p>
+                    <p>Date: {new Date(review.timestamp).toLocaleDateString()}</p>
+                    {review.location_id && (
+                      <p>
+                        Location:
+                        <a href={`/details/${review.location_id}`}>
+                          {review.location_id}
+                        </a>
+                      </p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       ) : (
         <p>Loading...</p>
       )}
     </div>
   );
+  
 };
 
 export default ProfileScreen;
