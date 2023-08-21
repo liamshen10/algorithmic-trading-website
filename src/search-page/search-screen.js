@@ -1,5 +1,6 @@
   import React, { useState, useEffect, useCallback, useRef } from 'react';
   import { useParams, useNavigate } from 'react-router-dom';
+  import { useSelector } from 'react-redux';
   import axios from 'axios';
   import './search-screen.css';
   import 'mapbox-gl/dist/mapbox-gl.css'; 
@@ -11,6 +12,8 @@
     const [showResults, setShowResults] = useState(true);
     const { criteria } = useParams();
     const navigate = useNavigate();
+    const user = useSelector(state => state.user.currentUser);
+
 
     const mapRef = useRef();
     const popupRef = useRef();
@@ -125,8 +128,11 @@
       }, 100);
     };
     
-    return (
-      <div className="search-container">
+    const isLoggedOut = !user;
+
+  return (
+    <div className="search-container">
+      <div className={`search-content ${isLoggedOut ? 'blurred' : ''}`}>
         <div className="search-search-bar">
           <input
             type="text"
@@ -159,7 +165,14 @@
         )}
         <div id="map" className="search-map"></div>
       </div>
-    );
-  };
+      {isLoggedOut && (
+        <div className="not-logged-in-card">
+          <p>You're not logged in!</p>
+          <a href="/login">Log in here</a>
+        </div>
+      )}
+    </div>
+  );
+};
 
-  export default SearchPage;
+export default SearchPage;
