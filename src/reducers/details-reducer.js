@@ -23,6 +23,7 @@ const detailsSlice = createSlice({
         state.reviews.push(payload);
       },
       [getReviewById.fulfilled]: (state, { payload }) => {
+        console.log("Checking the sourcePage", payload);
         state.reviews.push(payload);
       },
       [deleteReview.fulfilled]: (state, { payload }) => {

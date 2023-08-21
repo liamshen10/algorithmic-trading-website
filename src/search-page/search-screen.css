@@ -124,8 +124,8 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 150px !important; /* Adjusted width */
-  height: 150px !important; /* Adjusted height */
+  width: 100px !important; /* Adjusted width */
+  height: 100px !important; /* Adjusted height */
 }
 
 

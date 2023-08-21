@@ -77,7 +77,14 @@ useEffect(() => {
   reviews.map((review, index) => (
     <div key={index} className="details-review">
       <p>{'⭐'.repeat(review.stars)}</p>
-      <Link to={review.userId === user._id ? "/profile" : `/profile/${review.userId}`}>{review.userId}</Link>
+      <Link
+                to={{
+                  pathname: review.userId === user._id ? "/profile" : `/profile/${review.userId}`,
+                  state: { fromDetails: true }
+                }}
+              >
+                {review.userId}
+              </Link>
       <p>{review.content}</p>
       {user.role === 'administrator' && (
         <>

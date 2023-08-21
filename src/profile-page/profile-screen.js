@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation} from 'react-router-dom';
 import { fetchProfile, updateProfile } from '../services/auth-thunks';
 import { useNavigate } from "react-router";
 import { logout } from "../services/auth-thunks";
@@ -10,13 +10,18 @@ const ProfileScreen = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.currentUser);
   const viewedProfile = useSelector(state => state.user.viewedProfile);
-  const reviews = useSelector(state => state.details.reviews); // Get reviews from Redux store
-  const deletedReviews = useSelector(state => state.details.deletedReviews); // Get deletedReviews from Redux store
-  console.log('User: ',  user);
-  console.log("Reviews: ", reviews);
-  console.log("Deleted Reviews:", deletedReviews)
+ // Get deletedReviews from Redux store
   const [editableProfile, setEditableProfile] = useState({});
   const { profileId } = useParams();
+  const location = useLocation();
+  const fromDetails = location.state?.fromDetails;
+  const reduxReviews = useSelector(state => state.details.reviews); 
+  const reviews = fromDetails
+  ? profileId
+    ? reduxReviews
+    : user.reviews
+  : reduxReviews;
+  const deletedReviews = useSelector(state => state.details.deletedReviews);
   const id = user._id;
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
@@ -60,7 +65,7 @@ const ProfileScreen = () => {
   const profile = viewOnly ? viewedProfile : user;
   console.log("profile here", profile);
 
-  const reviewList = user.role === 'administrator' ? deletedReviews : reviews; // Use deletedReviews if the user is an administrator
+  const reviewList = user.role === 'administrator' ? deletedReviews : reviews;
   const filteredReviews = reviewList.filter(review =>
     review.content.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -68,7 +73,7 @@ const ProfileScreen = () => {
  return (
   <div className="profile-container">
     <h1 className="welcome-message">{viewOnly ? `${profile?.username}'s Profile` : 'Profile Screen'}</h1>
-    {viewOnly && <button onClick={handleBackClick}>Back</button>}
+    {viewOnly && <button className="back-button" onClick={handleBackClick}>Back</button>}
     {profile ? (
       <div className="profile-content">
         <div className="user-details">

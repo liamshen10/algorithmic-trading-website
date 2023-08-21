@@ -161,3 +161,12 @@ body {
 .button-logout:hover {
   background-color: #D32F2F;
 }
+
+.back-button {
+  background-color: orange;
+  color: white; /* Sets the text color to white */
+  border: none; /* Removes the default border */
+  padding: 15px; /* Adds some padding */
+  cursor: pointer; /* Changes the cursor to a hand pointer when hovering over the button */
+  
+}

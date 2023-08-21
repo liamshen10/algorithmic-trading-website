@@ -14,15 +14,29 @@ const HomeScreen = () => {
     if (currentUser) {
       if (currentUser.role === "reviewer") {
         const fetchReviews = async () => {
-          let reviewIds = currentUser.reviews.slice(0, 5);
-          const reviews = await Promise.all(
-            reviewIds.map(async (reviewId) => {
-              const result = await dispatch(getReviewById(reviewId));
-              return result.payload;
-            })
-          );
-          setDetails(reviews);
-        };
+  let reviewIds = currentUser.reviews;
+  const reviews = await Promise.all(
+    reviewIds.map(async (reviewId) => {
+      const result = await dispatch(getReviewById(reviewId));
+      return result.payload;
+    })
+  );
+
+  // Sort the reviews array by the most recent timestamp in descending order
+  const sortedReviews = reviews.sort((a, b) => {
+    const timestampA = new Date(a.timestamp).getTime();
+    const timestampB = new Date(b.timestamp).getTime();
+    return timestampB - timestampA;
+  });
+
+  // Extract the top 5 reviewIds from the sorted reviews array
+  const topReviewIds = sortedReviews.slice(0, 5).map((review) => review._id);
+
+  // Set the details with the top 5 sorted reviews
+  setDetails(sortedReviews.slice(0, 5));
+
+  // If you want to use the topReviewIds, you can do so here
+};
         fetchReviews();
       }
     } else {
