@@ -124,9 +124,10 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 200px; /* 16:9 ratio width */
-  height: 200px; /* 16:9 ratio height */
+  width: 150px !important; /* Adjusted width */
+  height: 150px !important; /* Adjusted height */
 }
+
 
 .mapboxgl-popup .address-container {
   border-top: 1px solid #e0e0e0;
