@@ -33,3 +33,8 @@ export const fetchDeletedReviews = async (searchTerm) => {
   const response = await api.get(`${apiBaseURL}/reviews-deleted/${searchTerm}`);
   return response.data;
 };
+
+export const fetchUsers = async () => {
+  const response = await api.get(`${apiBaseURL}/users`);
+  return response.data;
+};

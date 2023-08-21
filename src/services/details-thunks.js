@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchDeletedReviewsApi, deleteReviewApi, getReviewByIdApi, fetchDetailsApi, fetchReviewsApi, addReviewApi } from "./details-services";
+import { fetchDeletedReviewsByIdApi, deleteReviewApi, getReviewByIdApi, fetchDetailsApi, fetchReviewsApi, addReviewApi } from "./details-services";
 
 export const fetchDetails = createAsyncThunk(
     "details/fetchDetails",
@@ -41,4 +41,12 @@ export const deleteReview = createAsyncThunk(
     }
 );
 
-  
+
+export const fetchDeletedReviews = createAsyncThunk(
+    "details/fetchDeletedReviews",
+    async (userId) => {
+        console.log("fetchDeletedReviews userId:", userId);
+        const response = await fetchDeletedReviewsByIdApi(userId);
+        return response;
+    }
+);

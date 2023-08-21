@@ -1,44 +1,58 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getReviewById } from '../services/details-thunks'; // Import the appropriate thunk to fetch reviews by ID\
+import { getReviewById } from '../services/details-thunks'; // Import the appropriate thunk to fetch reviews by ID and fetch users
+import { fetchUsers } from '../services/auth-thunks';
 import './home-screen.css';
 
 const HomeScreen = () => {
   const [details, setDetails] = useState([]);
+  const [welcomeMessage, setWelcomeMessage] = useState("");
+  const [users, setUsers] = useState([]);
   const currentUser = useSelector(state => state.user.currentUser);
   const dispatch = useDispatch();
-  const deletedReviews = useSelector(state => state.details.deletedReviews);
-  
+
   useEffect(() => {
-    console.log("State of deletedReviews:", deletedReviews);
-  }, [deletedReviews]);
-  
-  useEffect(() => {
-    const fetchReviews = async () => {
-      const reviewIds = currentUser.reviews.slice(0, 5);
-      const reviews = await Promise.all(
-        reviewIds.map(async reviewId => {
-          const result = await dispatch(getReviewById(reviewId));
-          return result.payload;
-        })
-      );
-      setDetails(reviews);
-    };
-    
-    if (currentUser && currentUser.reviews) {
-      fetchReviews();
+    if (currentUser) {
+      if (currentUser.role === "reviewer") {
+        const fetchReviews = async () => {
+          let reviewIds = currentUser.reviews.slice(0, 5);
+          const reviews = await Promise.all(
+            reviewIds.map(async (reviewId) => {
+              const result = await dispatch(getReviewById(reviewId));
+              return result.payload;
+            })
+          );
+          setDetails(reviews);
+        };
+        fetchReviews();
+      } else if (currentUser.role === "administrator") {
+        setWelcomeMessage(`Welcome back, ${currentUser.username}`);
+      }
+    } else {
+      const fetchRandomUsers = async () => {
+        const first = await dispatch(fetchUsers());
+        const users = first.payload;
+        console.log('Users:', users);
+        if (Array.isArray(users)) {
+          setUsers(users.sort(() => Math.random() - 0.5));
+        } else {
+          console.error('Error: users is not an array:', users);
+        }
+      };
+      fetchRandomUsers();
     }
   }, [currentUser, dispatch]);
 
   return (
     <div className="home-container">
       <h1>Welcome to our website!</h1>
+      {welcomeMessage && <h2>{welcomeMessage}</h2>}
       <div className="activity-container">
         <div>
           <h2>Latest Activity:</h2>
           {/* ... code to display latest activity for all users ... */}
         </div>
-        {currentUser && (
+        {currentUser ? (
           <div>
             <h2>Your Recent Activity:</h2>
             <ul>
@@ -55,6 +69,18 @@ const HomeScreen = () => {
                       </a>
                     </p>
                   )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <div>
+            <h2>Random Reviewers:</h2>
+            <ul>
+              {users.map((user, index) => (
+                <li key={index}>
+                  <p>Username: {user.username}</p>
+                  <p>Number of Reviews: {user.reviews.length}</p>
                 </li>
               ))}
             </ul>

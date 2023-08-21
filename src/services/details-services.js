@@ -37,6 +37,17 @@ export const getReviewByIdApi = async (reviewId) => {
     return { _id: reviewId, deletedReview: response.data.deletedReview };
   };
   
+export const fetchDeletedReviewsByIdApi = async (userId) => {
+    try {
+        console.log("userid", userId);
+      const response = await api.get(`/review/reviews_deleted/${userId}`);
+      console.log("fetching on home screnn:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching deleted reviews:", error);
+      throw error;
+    }
+  };
   
   
   export const fetchDeletedReviewsApi = async () => {

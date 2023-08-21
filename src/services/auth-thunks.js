@@ -47,3 +47,11 @@ export const fetchDeletedReviews = createAsyncThunk(
     return deletedReviews;
   }
 );
+
+  export const fetchUsers = createAsyncThunk(
+    "users/fetchUsers",
+    async () => {
+      const users = await authService.fetchUsers();
+      return users;
+    }
+  );

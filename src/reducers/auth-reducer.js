@@ -19,6 +19,7 @@ const authSlice = createSlice({
     [logout.fulfilled]: (state) => {
       console.log(state.currentUser);
       state.currentUser = null;
+      localStorage.setItem("currentUser", JSON.stringify(null));
     },
     [login.fulfilled]: (state, { payload }) => {
       console.log("Login Paylod: ", payload);
