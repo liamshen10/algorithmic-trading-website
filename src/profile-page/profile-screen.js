@@ -65,13 +65,23 @@ const ProfileScreen = () => {
     review.content.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  return (
-    <div className="profile-container">
-      <h1 className="welcome-message">Welcome {user.username}</h1>
-      {viewOnly && <button onClick={handleBackClick}>Back</button>}
-      {profile ? (
-        <div className="profile-content">
-          <div className="user-details">
+ return (
+  <div className="profile-container">
+    <h1 className="welcome-message">{viewOnly ? `${profile?.username}'s Profile` : 'Profile Screen'}</h1>
+    {viewOnly && <button onClick={handleBackClick}>Back</button>}
+    {profile ? (
+      <div className="profile-content">
+        <div className="user-details">
+          <h2>
+            {viewOnly
+              ? viewedProfile
+                ? `${viewedProfile.username}'s Profile`
+                : "Loading..."
+              : user
+              ? `Welcome, ${user.username}`
+              : "Loading..."}
+          </h2>
+          {!viewOnly && (
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label>Email:</label>
@@ -93,26 +103,31 @@ const ProfileScreen = () => {
                   className="input-field"
                 />
               </div>
-              <button type="submit" className="button-save">Save Changes</button>
               <button
                 onClick={() => {
                   dispatch(logout());
                   navigate("/login");
                 }}
-                className="button-logout">Logout</button>
+                className="button-logout"
+              >
+                Logout
+              </button>
+              <button type="submit" className="button-save">Save Changes</button>
             </form>
+          )}
+        </div>
+        <div className="reviews-section">
+          <div>
+            <label>Search posts:</label>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="input-field"
+            />
           </div>
-          <div className="reviews-section">
-            <div>
-              <label>Search posts:</label>
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={handleSearchChange}
-                className="input-field"
-              />
-            </div>
-            {searchTerm && (
+          {searchTerm && (
+            <div className="scrollable-container">
               <ul className="reviews-list">
                 {filteredReviews.map((review, index) => (
                   <li key={index} className="review-item">
@@ -130,15 +145,15 @@ const ProfileScreen = () => {
                   </li>
                 ))}
               </ul>
-            )}
-          </div>
+            </div>
+          )}
         </div>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
-  );
-  
+      </div>
+    ) : (
+      <p>Loading...</p>
+    )}
+  </div>
+);
 };
 
 export default ProfileScreen;
