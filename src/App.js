@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import { useState } from 'react';
-import { Routes, Route } from "react-router";
+import { Navigate, Routes, Route } from "react-router";
 import RegisterScreen from "./register-page/registration-screen";
 import authReducer from "./reducers/auth-reducer";
 import { configureStore } from '@reduxjs/toolkit';
@@ -30,6 +30,7 @@ function App() {
           </div>
           <div className={`main-content ${isSidebarOpen ? "expanded" : "centered"}`}>
             <Routes>
+              <Route path="/" element={<Navigate to="/home"/>} />
               <Route path="/home" element={<HomeScreen />} />
               <Route path="/login" element={<LoginScreen />} />
               <Route path="/register" element={<RegisterScreen />} />
