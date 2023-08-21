@@ -11,6 +11,12 @@ const DetailsScreen = () => {
   const details = useSelector(state => state.details.details);
   const reviews = useSelector(state => state.details.reviews);
 console.log("Reviews in Component: ", reviews);
+const deletedReviews = useSelector(state => state.details.deletedReviews);
+  
+useEffect(() => {
+  console.log("State of deletedReviews:", deletedReviews);
+  console.log("State of current Reviews: ", reviews);
+}, [deletedReviews, reviews]);
 
   const user = useSelector(state => state.user.currentUser);
   const [newReview, setNewReview] = useState('');
@@ -18,9 +24,14 @@ console.log("Reviews in Component: ", reviews);
   const [streetViewImageURL, setStreetViewImageURL] = useState('');
 
   useEffect(() => {
+    console.log('Fetching reviews...');
+    console.log('uniqueIdentifier:', uniqueIdentifier);
+    console.log('dispatch:', dispatch);
     dispatch(fetchDetails(uniqueIdentifier));
     dispatch(fetchReviews(uniqueIdentifier));
-  }, [dispatch, uniqueIdentifier]);
+}, [dispatch, uniqueIdentifier]);
+
+
 
   useEffect(() => {
     if (details) {
@@ -43,10 +54,12 @@ console.log("Reviews in Component: ", reviews);
     setNewRating(0); // Reset the rating after submitting the review
   };
 
-  const handleDeleteReview = (_id) => {
-    console.log("handleDeleteReview called with ID:", _id);
-    dispatch(deleteReview(_id));
+  const handleDeleteReview = (_id, adminId) => {
+    console.log("handleDeleteReview called with reviewId:", _id, "and adminId:", adminId);
+    dispatch(deleteReview({ reviewId: _id, adminId: user }));
   };
+  
+
   
   if (!details) return <p>Loading...</p>;
   console.log(user.role);
@@ -71,7 +84,7 @@ console.log("Reviews in Component: ", reviews);
         <button onClick={() => {
     console.log("Delete button clicked");
     console.log('user_id: ', user._id)
-    handleDeleteReview(review._id);
+    handleDeleteReview(review._id, user);
 }}>Delete Review</button>
           {console.log("Review object:", review._id)}
         </>

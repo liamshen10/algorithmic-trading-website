@@ -22,8 +22,9 @@ const authSlice = createSlice({
     },
     [login.fulfilled]: (state, { payload }) => {
       console.log("Login Paylod: ", payload);
-      state.currentUser = payload;
-      localStorage.setItem("currentUser", JSON.stringify(payload));
+      state.currentUser = payload.user;
+      console.log("Current User: ", state.currentUser);
+      localStorage.setItem("currentUser", JSON.stringify(payload.user));
     },
     [fetchProfile.fulfilled]: (state, { payload }) => {
       console.log("Get Profile payload: ", payload);

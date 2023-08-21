@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as authService from "./auth-service";
+import { fetchReviews } from "./details-thunks";
 
 export const register = createAsyncThunk(
   "user/register", async (credentials) => {
@@ -8,12 +9,16 @@ export const register = createAsyncThunk(
 });
 
 
-export const login= createAsyncThunk(
-  "user/login", async (credentials) => {
+export const login = createAsyncThunk(
+  "user/login",
+  async (credentials, { dispatch }) => {
     const user = await authService.login(credentials);
+    if (user.role === 'reviewer') {
+      await dispatch(fetchReviews(user._id)); // Fetch all reviews for the logged-in user
+    }
     return user;
   }
- );
+);
 
  export const logout = createAsyncThunk(
   "user/logout", async () => {

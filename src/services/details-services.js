@@ -12,6 +12,7 @@ export const fetchDetailsApi = async (uniqueIdentifier) => {
 
 export const fetchReviewsApi = async (uniqueIdentifier) => {
     const response = await api.get(`/reviews/${uniqueIdentifier}`);
+    console.log('Fetch response', response.data);
     return response.data;
 };
 
@@ -27,14 +28,20 @@ export const getReviewByIdApi = async (reviewId) => {
     return response.data;
   };
 
-  export const deleteReviewApi = async (_id) => {
-    console.log("deleteReviewApi called with ID:", _id);
-    const response = await api.delete(`/reviews/${_id}`);
-    return { _id: _id };
+  export const deleteReviewApi = async (reviewId, adminId) => {
+    console.log("deleteReviewApi called with ID:", reviewId);
+    const response = await api.delete(`/review/${reviewId}`, {
+      data: { adminId: adminId }
+    });
+    console.log('Deleted Review: ', response.data.deletedReview);
+    return { _id: reviewId, deletedReview: response.data.deletedReview };
   };
+  
   
   
   export const fetchDeletedReviewsApi = async () => {
     const response = await api.get("/deletedReviews");
     return response.data;
   };
+
+  

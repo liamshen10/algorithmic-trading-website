@@ -35,9 +35,10 @@ export const getReviewById = createAsyncThunk(
 
 export const deleteReview = createAsyncThunk(
     "details/deleteReview",
-    async ( _id ) => {
-      const response = await deleteReviewApi(_id);
-      return response;
+    async ({ reviewId, adminId }) => {
+        const response = await deleteReviewApi(reviewId, adminId);
+        return response;
     }
-  );
+);
+
   

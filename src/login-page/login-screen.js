@@ -16,11 +16,13 @@ function LoginScreen() {
       if (login.rejected.match(resultAction)) {
         throw new Error('Login failed');
       }
+  
       navigate("/profile");
     } catch (e) {
       alert('Incorrect username or password');
     }
   };
+  
 
   return (
     <div className="container mt-5">

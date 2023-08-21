@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchProfile, updateProfile } from '../services/auth-thunks';
-import { getReviewById } from '../services/details-thunks';
 import { useNavigate } from "react-router";
 import { logout } from "../services/auth-thunks";
 
@@ -10,10 +9,14 @@ const ProfileScreen = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user.currentUser);
   const viewedProfile = useSelector(state => state.user.viewedProfile);
+  const reviews = useSelector(state => state.details.reviews); // Get reviews from Redux store
+  const deletedReviews = useSelector(state => state.details.deletedReviews); // Get deletedReviews from Redux store
+  console.log('User: ',  user);
+  console.log("Reviews: ", reviews);
+  console.log("Deleted Reviews:", deletedReviews)
   const [editableProfile, setEditableProfile] = useState({});
   const { profileId } = useParams();
   const id = user._id;
-  const [reviews, setReviews] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const viewOnly = profileId && profileId !== id;
@@ -53,30 +56,10 @@ const ProfileScreen = () => {
     navigate(-1); // Go back one step in the history
   };
 
-
-  useEffect(() => {
-    const fetchReviews = async () => {
-      const fetchedReviews = [];
-      const profile = viewOnly ? viewedProfile : user;
-      console.log("Fetching reviews for profile:", profile);
-      if (profile && profile.role !== 'administrator') {
-        for (let i = 0; i < profile.reviews.length; i++) {
-          const result = await dispatch(getReviewById(profile.reviews[i]));
-          if (result.payload) {
-            fetchedReviews.push(result.payload);
-          }
-        }
-        setReviews(fetchedReviews);
-      }
-    };
-    if ((viewOnly && viewedProfile) || (!viewOnly && user)) {
-      fetchReviews();
-    }
-  }, [user, viewedProfile, dispatch, viewOnly]);
-
   const profile = viewOnly ? viewedProfile : user;
 
-  const filteredReviews = reviews.filter(review =>
+  const reviewList = user.role === 'administrator' ? deletedReviews : reviews; // Use deletedReviews if the user is an administrator
+  const filteredReviews = reviewList.filter(review =>
     review.content.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -87,7 +70,7 @@ const ProfileScreen = () => {
       {profile ? (
         <div>
           <h2>
-            {viewOnly ? `${profile.username}'s Profile` : `Welcome, ${profile.username}`}
+            {viewOnly ? (viewedProfile ? `${viewedProfile.username}'s Profile` : "Loading...") : (user ? `Welcome, ${user.username}` : "Loading...")}
           </h2>
           <div>
             <label>Search posts:</label>
