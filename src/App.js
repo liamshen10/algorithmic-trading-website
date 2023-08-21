@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Routes, Route } from "react-router";
 import RegisterScreen from "./register-page/registration-screen";
 import authReducer from "./reducers/auth-reducer";
-import profileReducer from "./reducers/profile-reducer";
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,8 +14,9 @@ import ProfileScreen from "./profile-page/profile-screen";
 import SearchScreen from "./search-page/search-screen";
 import DetailsScreen from "./details-page/details-screen";
 import detailsReducer from "./reducers/details-reducer";
+import HomeScreen from "./home-page/home-screen";
 
-const store = configureStore({ reducer: { details: detailsReducer, user: authReducer, profile: profileReducer } });
+const store = configureStore({ reducer: { details: detailsReducer, user: authReducer} });
 
 function App() {
   const [isSidebarOpen, setSidebarOpen] = useState(false); // Initialize as closed
@@ -30,6 +30,7 @@ function App() {
           </div>
           <div className={`main-content ${isSidebarOpen ? "expanded" : "centered"}`}>
             <Routes>
+              <Route path="/home" element={<HomeScreen />} />
               <Route path="/login" element={<LoginScreen />} />
               <Route path="/register" element={<RegisterScreen />} />
               <Route path="/profile" element={<ProfileScreen />} />
