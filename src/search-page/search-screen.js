@@ -92,12 +92,12 @@
       if (popupRef.current) {
         popupRef.current.remove();
       }
-
-      const imageURL = `https://maps.googleapis.com/maps/api/streetview?size=200x200&location=${encodeURIComponent(placeName)}&fov=80&heading=70&pitch=0&key=${process.env.REACT_APP_GOOGLE_API_KEY}`;
-
+  
+      const imageURL = `https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${encodeURIComponent(placeName)}&fov=80&heading=70&pitch=0&key=${process.env.REACT_APP_GOOGLE_API_KEY}`;
+  
       popupRef.current = new mapboxgl.Popup({ closeOnClick: true })
         .setLngLat(coords)
-        .setHTML(`<div style="text-align:center;"><img src="${imageURL}" alt="Street View" style="width:100px;height:100px;"/><p>${placeName}</p></div><a href="/details/${encodeURIComponent(placeName)}">Details</a>`)
+        .setHTML(`<div style="text-align:center;"><img src="${imageURL}" alt="Street View" style="width:200px;height:200px;"/></div><div class="address-container"><p>${placeName}</p><a href="/details/${encodeURIComponent(placeName)}">Details</a></div>`)
         .addTo(mapRef.current);
     };
 
